@@ -25,6 +25,11 @@ $(function () {
             expect(allFeeds.length).not.toBe(0);
         });
 
+        /* Tests to make sure we have at least 3 entries to work with */
+        it('contain at least 3 entries', function () {
+            expect(allFeeds.length).toBeGreaterThan(2);
+        });
+
         /*
          * Test that loops through each feed in the allFeeds object and ensures
          * it has a URL defined and that the URL is not empty and starts with 'http'.
@@ -52,7 +57,7 @@ $(function () {
 
 
     /* Test suite "The menu" */
-    describe('The menu', function () {
+    describe('The Menu', function () {
 
         /* Test that ensures the menu element is hidden by default. */
         it('is hidden by default', function () {
@@ -77,19 +82,58 @@ $(function () {
     });
 
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /* Test suite "Initial Entries" */
+    describe('Initial Entries', function () {
 
-    /* TODO: Write a test that ensures when the loadFeed
-     * function is called and completes its work, there is at least
-     * a single .entry element within the .feed container.
-     * Remember, loadFeed() is asynchronous so this test will require
-     * the use of Jasmine's beforeEach and asynchronous done() function.
-     */
+        /* We have to run the expectations only after loadFeed() completes */
+        beforeEach(function (done) {
+            loadFeed(0, function () {
+                done();
+            });
+        });
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+        /*
+         * Test that ensures when the loadFeed function is called and completes its work,
+         * there is at least a single .entry element within the .feed container.
+         */
+        it('are present when loadFeed() completes', function (done) {
+            var $container = $('.feed'),
+                $entries = $container.find('.entry');
 
-     /* TODO: Write a test that ensures when a new feed is loaded
-     * by the loadFeed function that the content actually changes.
-     * Remember, loadFeed() is asynchronous.
-     */
+            expect($entries.length).toBeGreaterThan(0);
+            done();
+        });
+    });
+
+
+    /* Test suite "New Feed Selection" */
+    describe('New Feed Selection', function () {
+        var $container = $('.feed'),
+            oldFirstEntryTitle,
+            newFirstEntryTitle;
+
+        /* We have to run the expectations only after loadFeed() completes */
+        beforeEach(function (done) {
+            oldFirstEntryTitle = $container.find('.entry > h2:first').text();
+            loadFeed(1, function () {
+                newFirstEntryTitle = $container.find('.entry > h2:first').text();
+                done();
+            });
+        });
+
+        /* Reset to initial entries after tests run */
+        afterEach(function () {
+            loadFeed(0);
+        });
+
+        /*
+         * Test that ensures when a new feed is loaded by the loadFeed function
+         * that the content actually changes.
+         */
+        it('actually changes when loadFeed() completes', function (done) {
+            expect(newFirstEntryTitle).not.toBe(oldFirstEntryTitle);
+
+            done();
+        });
+    });
 }());
