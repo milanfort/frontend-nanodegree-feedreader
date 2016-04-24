@@ -53,6 +53,19 @@ $(function () {
                 expect(feed.name[0].toUpperCase() === feed.name[0]).toBe(true);
             });
         });
+
+        /*
+         * Test that loops through each feed in the allFeeds object and ensures
+         * it has an id field generated after page load and that it is greater than zero
+         * and less than the length of allFeeds array.
+         */
+        it('have an id field between zero and length generated after page load', function () {
+            allFeeds.forEach(function (feed) {
+                expect(feed.id).toBeDefined();
+                expect(feed.id).toBeGreaterThan(-1);
+                expect(feed.id).toBeLessThan(allFeeds.length);
+            });
+        });
     });
 
 
