@@ -132,7 +132,6 @@ $(function () {
          */
         it('actually changes when loadFeed() completes', function (done) {
             expect(newFirstEntryTitle).not.toBe(oldFirstEntryTitle);
-
             done();
         });
     });
