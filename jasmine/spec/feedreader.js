@@ -9,34 +9,45 @@
  * to ensure they don't run until the DOM is ready.
  */
 $(function () {
+
     /* This is our first test suite - a test suite just contains
      * a related set of tests. This suite is all about the RSS
      * feeds definitions, the allFeeds variable in our application.
      */
     describe('RSS Feeds', function () {
-        /* This is our first test - it tests to make sure that the
-         * allFeeds variable has been defined and that it is not
-         * empty. Experiment with this before you get started on
-         * the rest of this project. What happens when you change
-         * allFeeds in app.js to be an empty array and refresh the
-         * page?
+
+        /*
+         * Tests to make sure that the allFeeds variable has been defined
+         * and that it is not empty.
          */
         it('are defined', function () {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
 
-
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty.
+        /*
+         * Test that loops through each feed in the allFeeds object and ensures
+         * it has a URL defined and that the URL is not empty and starts with 'http'.
          */
+        it('have URL defined, non-empty, and starting with http', function () {
+            allFeeds.forEach(function (feed) {
+                expect(feed.url).toBeDefined();
+                expect(feed.url.trim().length).not.toBe(0);
+                expect(feed.url.startsWith('http')).toBe(true);
+            });
+        });
 
-
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
+        /*
+         * Test that loops through each feed in the allFeeds object and ensures
+         * it has a name defined and that the name is not empty and starts with a capital letter.
          */
+        it('have name defined, non-empty, and starting with a capital letter', function () {
+            allFeeds.forEach(function (feed) {
+                expect(feed.name).toBeDefined();
+                expect(feed.name.trim().length).not.toBe(0);
+                expect(feed.name[0].toUpperCase() === feed.name[0]).toBe(true);
+            });
+        });
     });
 
 
