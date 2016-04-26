@@ -24,6 +24,19 @@ The following tests were required by the specification:
 ## Live Version
 
 This solution is deployed through GitHub Pages at the following URL:
-[http://www.milanfort.com/frontend-nanodegree-feedreader/](http://www.milanfort.com/frontend-nanodegree-feedreader/)
-
+[http://www.milanfort.com/frontend-nanodegree-feedreader/](http://www.milanfort.com/frontend-nanodegree-feedreader/).
 The page contains the Jasmine HTML test output at the bottom.
+
+
+## Installation Instructions
+
+To run the web application locally, please follow these steps:
+
+1. Clone this git repository:
+    ```
+    $ git clone https://github.com/milanfort/frontend-nanodegree-feedreader.git
+    ```
+
+2. Change your working directory to _frontend-nanodegree-feedreader_
+
+3. Open file `index.html` in your web browser
