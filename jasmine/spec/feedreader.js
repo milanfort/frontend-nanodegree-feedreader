@@ -132,8 +132,8 @@ $(function () {
         });
 
         /* Reset to initial entries after tests run */
-        afterEach(function () {
-            loadFeed(0);
+        afterEach(function (done) {
+            loadFeed(0, done);
         });
 
         /*
