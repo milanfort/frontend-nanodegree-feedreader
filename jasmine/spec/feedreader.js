@@ -118,22 +118,8 @@ $(function () {
 
     /* Test suite "New Feed Selection" */
     describe('New Feed Selection', function () {
-        var $container = $('.feed'),
-            oldFirstEntryTitle,
-            newFirstEntryTitle;
 
-        /* We have to run the expectations only after loadFeed() completes */
-        beforeEach(function (done) {
-            loadFeed(0, function () {
-                oldFirstEntryTitle = $container.find('.entry > h2:first').text();
-                loadFeed(1, function () {
-                    newFirstEntryTitle = $container.find('.entry > h2:first').text();
-                    done();
-                });
-            });
-        });
-
-        /* Reset to initial entries after tests run */
+        /* Reset to initial entries after all tests run */
         afterAll(function (done) {
             loadFeed(0, done);
         });
@@ -143,8 +129,18 @@ $(function () {
          * that the content actually changes.
          */
         it('actually changes when loadFeed() completes', function (done) {
-            expect(newFirstEntryTitle).not.toBe(oldFirstEntryTitle);
-            done();
+            var $container = $('.feed'),
+                oldFirstEntryTitle,
+                newFirstEntryTitle;
+
+            loadFeed(0, function () {
+                oldFirstEntryTitle = $container.find('.entry > h2:first').text();
+                loadFeed(1, function () {
+                    newFirstEntryTitle = $container.find('.entry > h2:first').text();
+                    expect(newFirstEntryTitle).not.toBe(oldFirstEntryTitle);
+                    done();
+                });
+            });
         });
     });
 }());
