@@ -124,15 +124,17 @@ $(function () {
 
         /* We have to run the expectations only after loadFeed() completes */
         beforeEach(function (done) {
-            oldFirstEntryTitle = $container.find('.entry > h2:first').text();
-            loadFeed(1, function () {
-                newFirstEntryTitle = $container.find('.entry > h2:first').text();
-                done();
+            loadFeed(0, function () {
+                oldFirstEntryTitle = $container.find('.entry > h2:first').text();
+                loadFeed(1, function () {
+                    newFirstEntryTitle = $container.find('.entry > h2:first').text();
+                    done();
+                });
             });
         });
 
         /* Reset to initial entries after tests run */
-        afterEach(function (done) {
+        afterAll(function (done) {
             loadFeed(0, done);
         });
 
