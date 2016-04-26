@@ -100,9 +100,7 @@ $(function () {
 
         /* We have to run the expectations only after loadFeed() completes */
         beforeEach(function (done) {
-            loadFeed(0, function () {
-                done();
-            });
+            loadFeed(0, done);
         });
 
         /*
