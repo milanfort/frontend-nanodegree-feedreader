@@ -107,12 +107,11 @@ $(function () {
          * Test that ensures when the loadFeed function is called and completes its work,
          * there is at least a single .entry element within the .feed container.
          */
-        it('are present when loadFeed() completes', function (done) {
+        it('are present when loadFeed() completes', function () {
             var $container = $('.feed'),
                 $entries = $container.find('.entry');
 
             expect($entries.length).toBeGreaterThan(0);
-            done();
         });
     });
 
